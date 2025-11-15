@@ -156,9 +156,9 @@ public struct MarqueeText: View {
     public init(
         text: String,
         font: UIFont,
-        leftFade: CGFloat,
-        rightFade: CGFloat,
-        startDelay: Double,
+        leftFade: CGFloat = 16.0,
+        rightFade: CGFloat = 16.0,
+        startDelay: Double = 3.0,
         alignment: Alignment? = nil,
         animation: Animation? = nil,
     ) {
