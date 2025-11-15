@@ -157,9 +157,9 @@ public struct MarqueeText: View {
         startDelay: Double = 3.0,
         alignment: Alignment? = nil
     ) {
-        self.text      = text
-        self.font      = font
-        self.leftFade  = leftFade
+        self.text = text
+        self.font = font
+        self.leftFade = leftFade
         self.rightFade = rightFade
         self.startDelay = startDelay
         self.alignment = alignment ?? .topLeading
