@@ -8,6 +8,10 @@ public struct MarqueeText: View {
     public var startDelay: Double
     public var alignment: Alignment
     public var animation: Animation? = nil
+
+    private var txtAnimation: Animation {
+        
+    }
     
     @State private var animate = false
     var isCompact = false
@@ -17,10 +21,9 @@ public struct MarqueeText: View {
         let stringHeight = text.heightOfString(usingFont: font)
         
         let txtAnimation = self.animation ?? Animation
-            .linear(duration: Double(stringWidth) / 30)
+            .easeInOut(duration: Double(stringWidth) / 30)
             .delay(startDelay)
             .repeatForever(autoreverses: false)
-        let nullAnimation = Animation.linear(duration: 0)
         
         GeometryReader { geo in
             // Decide if scrolling is needed
@@ -33,8 +36,7 @@ public struct MarqueeText: View {
                         stringWidth: stringWidth,
                         stringHeight: stringHeight,
                         geoWidth: geo.size.width,
-                        animation: txtAnimation,
-                        nullAnimation: nullAnimation
+                        animation: txtAnimation
                     )
                     // force left alignment when scrolling
                     .frame(
@@ -101,8 +103,7 @@ public struct MarqueeText: View {
         stringWidth: CGFloat,
         stringHeight: CGFloat,
         geoWidth: CGFloat,
-        animation: Animation,
-        nullAnimation: Animation
+        animation: Animation
     ) -> some View {
         // Two stacked texts moving across in opposite phases
         Group {
@@ -110,14 +111,14 @@ public struct MarqueeText: View {
                 .lineLimit(1)
                 .font(.init(font))
                 .offset(x: animate ? -stringWidth - stringHeight * 2 : 0)
-                .animation(animate ? animation : nullAnimation, value: animate)
+                .conditionalAnimation(animate, animation: animation, value: animate)
                 .fixedSize(horizontal: true, vertical: false)
             
             Text(text)
                 .lineLimit(1)
                 .font(.init(font))
                 .offset(x: animate ? 0 : stringWidth + stringHeight * 2)
-                .animation(animate ? animation : nullAnimation, value: animate)
+                .conditionalAnimation(animate, animation: animation, value: animate)
                 .fixedSize(horizontal: true, vertical: false)
         }
     }
@@ -156,8 +157,8 @@ public struct MarqueeText: View {
     public init(
         text: String,
         font: UIFont,
-        leftFade: CGFloat = 16.0,
-        rightFade: CGFloat = 16.0,
+        leftFade: CGFloat = 30.0,
+        rightFade: CGFloat = 30.0,
         startDelay: Double = 3.0,
         alignment: Alignment? = nil,
         animation: Animation? = nil,
