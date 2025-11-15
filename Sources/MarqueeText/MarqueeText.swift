@@ -7,6 +7,7 @@ public struct MarqueeText: View {
     public var rightFade: CGFloat
     public var startDelay: Double
     public var alignment: Alignment
+    public var animation: Animation? = nil
     
     @State private var animate = false
     var isCompact = false
@@ -15,12 +16,10 @@ public struct MarqueeText: View {
         let stringWidth  = text.widthOfString(usingFont: font)
         let stringHeight = text.heightOfString(usingFont: font)
         
-        // Create our animations
-        let animation = Animation
+        let txtAnimation = self.animation ?? Animation
             .linear(duration: Double(stringWidth) / 30)
             .delay(startDelay)
             .repeatForever(autoreverses: false)
-        
         let nullAnimation = Animation.linear(duration: 0)
         
         GeometryReader { geo in
