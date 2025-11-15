@@ -33,7 +33,7 @@ public struct MarqueeText: View {
                         stringWidth: stringWidth,
                         stringHeight: stringHeight,
                         geoWidth: geo.size.width,
-                        animation: animation,
+                        animation: txtAnimation,
                         nullAnimation: nullAnimation
                     )
                     // force left alignment when scrolling
