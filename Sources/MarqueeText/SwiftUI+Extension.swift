@@ -22,14 +22,8 @@ extension View {
             }
         }
     }
+}
 
-    @ViewBuilder
-    func conditionalAnimation<Value : Equatable>(_ bool: Bool, animation: Animation, value: Value) -> some View {
-        if bool {
-            self
-                .animation(animation, value: value)
-        } else {
-            self
-        }
-    }
+extension Animation {
+    static let null: Animation = Animation.linear(duration: 0.0)
 }

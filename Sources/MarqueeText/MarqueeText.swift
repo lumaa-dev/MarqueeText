@@ -106,14 +106,14 @@ public struct MarqueeText: View {
                 .lineLimit(1)
                 .font(.init(font))
                 .offset(x: animate ? -stringWidth - stringHeight * 2 : 0)
-                .conditionalAnimation(animate, animation: animation, value: animate)
+                .animation(animate ? animation : Animation.null, value: animate)
                 .fixedSize(horizontal: true, vertical: false)
             
             Text(text)
                 .lineLimit(1)
                 .font(.init(font))
                 .offset(x: animate ? 0 : stringWidth + stringHeight * 2)
-                .conditionalAnimation(animate, animation: animation, value: animate)
+                .animation(animate ? animation : Animation.null, value: animate)
                 .fixedSize(horizontal: true, vertical: false)
         }
     }
