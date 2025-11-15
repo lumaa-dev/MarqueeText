@@ -159,7 +159,8 @@ public struct MarqueeText: View {
         leftFade: CGFloat,
         rightFade: CGFloat,
         startDelay: Double,
-        alignment: Alignment? = nil
+        alignment: Alignment? = nil,
+        animation: Animation? = nil,
     ) {
         self.text      = text
         self.font      = font
@@ -167,6 +168,7 @@ public struct MarqueeText: View {
         self.rightFade = rightFade
         self.startDelay = startDelay
         self.alignment = alignment ?? .topLeading
+        self.animation = animation
     }
 }
 
